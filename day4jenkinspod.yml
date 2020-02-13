@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: day4ashpod11
+    x: ashwjenkins
+  name: day4ashpod11
+  namespace: ashwin
+spec:
+  containers:
+  - image: mscorp83/ashwapp:v1
+    name: day4ashpod11
+    ports:
+     - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: day4ashujensvc
+  name: day4ashujensvc
+  namespace: ashwin
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    x: ashwjenkins
+  type: NodePort
+status:
+  loadBalancer: {}
